@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37203.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobService.Api", "JobService.Api\JobService.Api.csproj", "{391D1396-8D8D-4215-A607-0F040460B240}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobService.Application", "JobService.Application\JobService.Application.csproj", "{A1A1A1A1-1111-4111-A111-111111111111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobService.Domain", "JobService.Domain\JobService.Domain.csproj", "{B2B2B2B2-2222-4222-B222-222222222222}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobService.Infrastructure", "JobService.Infrastructure\JobService.Infrastructure.csproj", "{C3C3C3C3-3333-4333-C333-333333333333}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{391D1396-8D8D-4215-A607-0F040460B240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{391D1396-8D8D-4215-A607-0F040460B240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{391D1396-8D8D-4215-A607-0F040460B240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{391D1396-8D8D-4215-A607-0F040460B240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1A1A1A1-1111-4111-A111-111111111111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A1A1A1-1111-4111-A111-111111111111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A1A1A1-1111-4111-A111-111111111111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A1A1A1-1111-4111-A111-111111111111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2B2B2B2-2222-4222-B222-222222222222}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B2B2B2-2222-4222-B222-222222222222}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2B2B2B2-2222-4222-B222-222222222222}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2B2B2B2-2222-4222-B222-222222222222}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C3C3C3-3333-4333-C333-333333333333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C3C3C3-3333-4333-C333-333333333333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C3C3C3-3333-4333-C333-333333333333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C3C3C3-3333-4333-C333-333333333333}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31819BA9-8F03-4DE5-9D3C-555B857A682E}
+	EndGlobalSection
+EndGlobal
