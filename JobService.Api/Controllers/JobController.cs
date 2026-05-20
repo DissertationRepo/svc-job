@@ -1,4 +1,6 @@
 using AutoMapper;
+using System;
+using AutoMapper;
 using JobService.Api.Models;
 using JobService.Application.Abstract_Services;
 using Microsoft.AspNetCore.Authorization;
@@ -33,8 +35,15 @@ namespace JobService.Api.Controllers
         [Authorize]
         public async Task<IActionResult> CreateJob([FromBody] NewJob newJob)
         {
+            // extract user id from token
+            var userIdClaim = User.FindFirst("uid");
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var claimUserId))
+            {
+                return BadRequest("User id claim not found or invalid.");
+            }
+
             var jobCommand = _mapper.Map<JobService.Application.Models.JobModel>(newJob);
-            await _jobService.CreateJobAsync(jobCommand);
+            await _jobService.CreateJobAsync(jobCommand, claimUserId);
             return Ok();
         }
 
@@ -55,6 +64,62 @@ namespace JobService.Api.Controllers
 
             var response = _mapper.Map<JobResponse>(domainJob);
             return Ok(response);
+        }
+
+        // GET /jobs/search?q=term
+        [HttpGet("search")]
+        [Authorize]
+        public async Task<IActionResult> SearchJobs([FromQuery(Name = "q")] string? q)
+        {
+            if (string.IsNullOrWhiteSpace(q))
+            {
+                return BadRequest("Query parameter 'q' is required.");
+            }
+
+            var domainJobs = await _jobService.SearchJobsAsync(q);
+            var response = _mapper.Map<ICollection<JobResponse>>(domainJobs);
+            return Ok(response);
+        }
+
+        // GET /jobs/me - returns jobs for the authenticated user (reads uid claim from token)
+        [HttpGet("me")]
+        [Authorize]
+        public async Task<IActionResult> GetMyJobs()
+        {
+            // The access token contains the user id in the "uid" claim.
+            var userIdClaim = User.FindFirst("uid");
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var claimUserId))
+            {
+                return BadRequest("User id claim not found or invalid.");
+            }
+
+            var domainJobs = await _jobService.GetJobsByUserAsync(claimUserId);
+            var response = _mapper.Map<ICollection<JobResponse>>(domainJobs);
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> DeleteJob(string id)
+        {
+            if (!Guid.TryParse(id, out var jobId))
+            {
+                return BadRequest("Invalid job ID format. Please provide a valid GUID.");
+            }
+
+            var userIdClaim = User.FindFirst("uid");
+            if (userIdClaim == null || !Guid.TryParse(userIdClaim.Value, out var claimUserId))
+            {
+                return BadRequest("User id claim not found or invalid.");
+            }
+
+            var deleted = await _jobService.DeleteJobAsync(jobId, claimUserId);
+            if (!deleted)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
 
         // ----- Job Requirements -----

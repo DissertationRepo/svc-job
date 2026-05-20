@@ -3,6 +3,7 @@ namespace JobService.Infrastructure.Entities;
 public sealed class JobEntity
 {
     public Guid Id { get; set; }
+    public Guid UserId { get; set; }
     public string JobTitle { get; set; } = null!;
     public string JobDescription { get; set; } = null!;
     public decimal SalaryMin { get; set; }

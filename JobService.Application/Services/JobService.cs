@@ -13,7 +13,7 @@ namespace JobService.Application.Services
             _jobRepository = jobRepository ?? throw new ArgumentNullException(nameof(jobRepository));
         }
 
-        public async Task CreateJobAsync(JobModel newJob)
+        public async Task CreateJobAsync(JobModel newJob, Guid userId)
         {
             var domainJob = Job.Create(
                 newJob.JobTitle,
@@ -27,12 +27,27 @@ namespace JobService.Application.Services
                 newJob.RequiredSkillLevel,
                 newJob.SeniorityLevel);
 
-            await _jobRepository.AddJob(domainJob);
+            await _jobRepository.AddJob(domainJob, userId);
         }
 
         public Task<Job?> GetJobByIdAsync(Guid id)
         {
             return _jobRepository.GetJobById(id);
+        }
+
+        public Task<ICollection<Job>> GetJobsByUserAsync(Guid userId)
+        {
+            return _jobRepository.GetJobsByUserId(userId);
+        }
+
+        public Task<bool> DeleteJobAsync(Guid id, Guid userId)
+        {
+            return _jobRepository.DeleteJobByIdAsync(id, userId);
+        }
+
+        public Task<ICollection<Job>> SearchJobsAsync(string query)
+        {
+            return _jobRepository.SearchJobsAsync(query);
         }
     }
 }

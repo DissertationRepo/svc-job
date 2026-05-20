@@ -4,8 +4,8 @@ public sealed record EmploymentType
 {
     private static readonly HashSet<string> Allowed = new(StringComparer.OrdinalIgnoreCase)
     {
-        "FullTime",
-        "PartTime",
+        "Full-Time",
+        "Part-Time",
         "Contract",
         "Internship",
         "Temporary",

@@ -15,6 +15,11 @@ public sealed class JobConfiguration : IEntityTypeConfiguration<JobEntity>
         builder.Property(x => x.Id)
             .HasColumnName("id");
 
+        builder.Property(x => x.UserId)
+            .IsRequired()
+            .HasColumnType("uuid")
+            .HasColumnName("user_id");
+
         builder.Property(x => x.JobTitle)
             .IsRequired()
             .HasMaxLength(200)
